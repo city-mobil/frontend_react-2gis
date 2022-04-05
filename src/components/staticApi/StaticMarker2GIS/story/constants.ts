@@ -1,0 +1,1 @@
+export const POINT_COORDS_IN_MOSCOW = [55.731426, 37.608879]

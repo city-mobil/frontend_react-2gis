@@ -1,0 +1,3 @@
+{
+  "extends": ["@city/stylelint-config-sass"]
+}

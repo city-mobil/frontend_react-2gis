@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="About" />
+
+# Библиотека компонентов react-2gis
+
+Реализация компонентов для создания веб-приложений.
+
+## Использование
+
+Компоненты реализованы на [typescript](https://www.typescriptlang.org) с помощью [react](https://reactjs.org), [MapGL JS API](https://docs.2gis.com/ru/mapgl/overview) и [Static API](https://docs.2gis.com/ru/api/map/static/overview);
+
+Использование данного пакета предполагает использование `react` & `react-dom`;
+
+### Установка пакета
+
+```bash
+$ npm install @city/react-2gis
+```
+
+### Использование компонентов
+
+```jsx
+// App.tsx
+import { Map2GIS } from '@city/react-2gis'
+
+export const App = () => {
+  return <Map2GIS initialMapOptions={initialMapOptions}>{children}</Map2GIS>
+}
+```
+
+

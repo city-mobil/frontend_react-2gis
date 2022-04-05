@@ -1,0 +1,22 @@
+FROM node:14-slim as build
+
+ARG NPM_AUTH_TOKEN
+
+WORKDIR /opt/react-2gis
+RUN echo "registry=${NpmProxyUrl}" >> .npmrc && echo "_auth=$NPM_AUTH_TOKEN" >> .npmrc
+
+COPY ./package*.json ./
+COPY ./yarn.lock ./
+COPY *node_modules/ ./node_modules/
+
+RUN yarn install --silent --ignore-optional --frozen-lockfile
+
+COPY ./ ./
+
+RUN yarn build-storybook -o ./build-storybook
+
+FROM nginx:1.18.0
+COPY --from=build /opt/react-2gis/build-storybook /usr/share/nginx/html/
+
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 \
+  CMD curl --user-agent 'docker-healtcheck' --max-time 3 http://127.0.0.1:80/ || exit 1

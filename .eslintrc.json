@@ -1,0 +1,14 @@
+{
+  "extends": "@city/eslint-config",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": ["rollup.config.ts"],
+  "rules": {}
+}

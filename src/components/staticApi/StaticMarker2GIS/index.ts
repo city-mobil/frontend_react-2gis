@@ -1,0 +1,6 @@
+export * from './StaticMarker2GIS'
+export * from './StaticNumberedMarker2GIS'
+export * from './StaticCustomMarker2GIS'
+export * from './models'
+export * from './enums'
+export * from './utils'

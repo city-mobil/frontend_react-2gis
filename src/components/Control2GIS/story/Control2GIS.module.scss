@@ -1,0 +1,13 @@
+.Control {
+  color: #fff;
+  background: rgb(212, 75, 56);
+  padding: 0.7em 1.5em;
+
+  &:hover {
+    background: rgb(232, 95, 76);
+  }
+
+  &:active {
+    background: rgb(152, 15, 0);
+  }
+}
