@@ -16,6 +16,5 @@ export const StaticImage: FC<StaticImageProps> = ({ src, imgProps, hasError, onE
     return <>{fallback}</>
   }
 
-  // eslint-disable-next-line jsx-a11y/alt-text
   return <img src={src} {...imgProps} onError={onError} />
 }

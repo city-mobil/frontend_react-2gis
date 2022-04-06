@@ -2,17 +2,6 @@
 
 Реакт-обертка над WebGL-картами 2ГИС. (Используется ResizeObserver, подключите полифил, если это необходимо)
 
-.npmrc
----
-
-Необходимо создать файл `.npmrc`:
-
-```bash
-echo 'registry=${NpmProxyUrl}
-tag-version-prefix=""
-' >.npmrc
-```
-
 ## Сборка
 
 Для сборки библиотеки используется команда `yarn run build`
