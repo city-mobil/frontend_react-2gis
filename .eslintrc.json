@@ -1,14 +1,113 @@
 {
-  "extends": "@city/eslint-config",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true,
       "modules": true
     },
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["rollup.config.ts"],
-  "rules": {}
+  "plugins": [
+    "prettier",
+    "@typescript-eslint",
+    "promise",
+    "simple-import-sort",
+    "import",
+    "react-hooks"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:promise/recommended",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "rules": {
+    "no-var": "warn",
+    "no-debugger": "warn",
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return"
+      },
+      {
+        "blankLine": "always",
+        "prev": [
+          "block-like",
+          "class",
+          "continue",
+          "while",
+          "for",
+          "do",
+          "if"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": [
+          "const",
+          "let"
+        ],
+        "next": [
+          "while",
+          "for",
+          "do",
+          "if",
+          "switch"
+        ]
+      }
+    ],
+    "typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/unbound-method": "warn",
+    "@typescript-eslint/require-await": "warn",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-var-requires": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "promise/always-return": "off",
+    "promise/catch-or-return": "off",
+    "promise/no-return-wrap": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 120,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": false,
+        "singleQuote": true,
+        "quoteProps": "as-needed",
+        "jsxSingleQuote": false,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "arrowParens": "always"
+      }
+    ],
+    "simple-import-sort/imports": "error",
+    "import/first": "error",
+    "import/no-duplicates": "error",
+    "import/newline-after-import": "error",
+    "react-hooks/exhaustive-deps": [
+      "error",
+      { "enableDangerousAutofixThisMayCauseInfiniteLoops": true }
+    ]
+  }
 }
