@@ -1,10 +1,10 @@
-import React, { FC, memo, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { FC, memo, ReactNode, useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 
+import { useForceUpdate } from '../../hooks'
 import { ClustererEventHandlerTable } from '../../models'
 import { defer } from '../../utils'
 import { ClustererBase2GIS } from './ClustererBase2GIS'
-import { useForceUpdate } from './hooks/useForceUpdate'
 import {
   ClustererOptionsOverride,
   ClusterStyleFn,
@@ -55,6 +55,8 @@ const Clusterer2GISComponent: FC<Clusterer2GISProps> = (props) => {
   } = props
 
   const [inputMarkers, setInputMarkers] = useState<InputMarker2GIS[]>([])
+  const [isUpdatedMarkerStyle, setIsUpdatedMarkerStyle] = useReducer(() => Date.now(), Date.now())
+
   const inputWebglMarkersRef = useRef<WebglInputMarker2GIS[]>([])
   const inputHtmlMarkersRef = useRef<HtmlInputMarker2GIS[]>([])
 
@@ -119,6 +121,9 @@ const Clusterer2GISComponent: FC<Clusterer2GISProps> = (props) => {
         coordinates,
         userData,
       })
+
+      // обновляем признак, чтобы отработал эффект с setInputMarkers
+      setIsUpdatedMarkerStyle()
     }
   }, [inputHtmlMarkers, htmlMarkerStyle, renderHtmlMarker])
 
@@ -140,6 +145,9 @@ const Clusterer2GISComponent: FC<Clusterer2GISProps> = (props) => {
         ...(markerStyleCfg || {}),
         ...inputMarker,
       })
+
+      // обновляем признак, чтобы отработал эффект с setInputMarkers
+      setIsUpdatedMarkerStyle()
     }
   }, [inputWebglMarkers, webglMarkerStyle])
 
@@ -150,8 +158,13 @@ const Clusterer2GISComponent: FC<Clusterer2GISProps> = (props) => {
 
     setInputMarkers([...inputHtmlMarkersRef.current, ...inputWebglMarkersRef.current])
 
+    // проверяем, чтобы не ругалось правило хуков
+    if (isUpdatedMarkerStyle === undefined) {
+      return
+    }
+
     // реагируем на изменение пропсов с данными
-  }, [inputHtmlMarkers, inputWebglMarkers])
+  }, [inputHtmlMarkers, inputWebglMarkers, isUpdatedMarkerStyle])
 
   // формируем функцию стилизации кластера
   const clusterStyleFn = useCallback<ClusterStyleFn>(
@@ -210,6 +223,6 @@ const Clusterer2GISComponent: FC<Clusterer2GISProps> = (props) => {
 }
 
 /**
- * Кластеризация 2ГИС
+ * Кластеризатор 2ГИС
  */
 export const Clusterer2GIS = memo(Clusterer2GISComponent)

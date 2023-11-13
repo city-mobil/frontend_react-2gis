@@ -146,6 +146,15 @@ export default {
       },
       control: { type: 'text' },
     },
+    isHidden: {
+      description: 'Показывать или нет маркер.',
+      table: {
+        type: {
+          summary: 'boolean',
+        },
+      },
+      control: { type: 'boolean' },
+    },
     onClick: {
       description: 'Обработчик события "click".',
       table: {
