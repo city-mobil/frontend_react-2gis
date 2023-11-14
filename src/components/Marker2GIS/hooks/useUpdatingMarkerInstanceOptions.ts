@@ -6,6 +6,9 @@ import { useEffect, useRef } from 'react'
  * Установка экземпляру маркера возможных свойств.
  * @param instance Метод получения экземпляра маркера
  * @param options Опции маркера
+ *
+ * ToDo кажется хук не имеет смысла, т.к. он вызывается до того как отработает эффект, который обновит MarkerOptions.
+ *   для корректной работы пришлось заюзать forceUpdate. Нужно перенести все эффекты в основной компонент и реагировать на изменение пропс.
  */
 export const useUpdatingMarkerInstanceOptions = (instance: Marker | null, options: MarkerOptions) => {
   const { coordinates, icon, size, anchor, rotation, hoverIcon, hoverSize, hoverAnchor, label } = options

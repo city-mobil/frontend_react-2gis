@@ -1,6 +1,6 @@
 {
   "name": "@city/react-2gis",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "React wrapper for 2GIS WebGL maps",
   "main": "dist/index.js",
   "scripts": {
@@ -21,9 +21,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@2gis/mapgl": "^1.24.0",
-    "@2gis/mapgl-clusterer": "2.4.3",
-    "@babel/core": "^7.16.5",
+    "@2gis/mapgl": "^1.41.1",
+    "@2gis/mapgl-clusterer": "2.5.0",
+    "@babel/core": "^7.23.3",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.1",
     "@storybook/addon-actions": "^6.4.9",
@@ -63,8 +63,8 @@
     "typescript": "4.4.4"
   },
   "peerDependencies": {
-    "@2gis/mapgl": "^1.24.0",
-    "@2gis/mapgl-clusterer": "2.4.3",
+    "@2gis/mapgl": "^1.41.1",
+    "@2gis/mapgl-clusterer": "2.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
