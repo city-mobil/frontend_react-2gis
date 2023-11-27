@@ -1,9 +1,9 @@
 import { HtmlMarker, HtmlMarkerOptions } from '@2gis/mapgl/global'
-import { FC, memo, ReactNode, useEffect, useRef } from 'react'
+import { FC, memo, ReactNode, useEffect, useMemo, useRef } from 'react'
 import ReactDOM from 'react-dom'
 
-import { useInstance, useReCreateInstanceWithSetterlessProps } from '../../hooks'
-import { getOptions } from '../../utils'
+import { useForceUpdate, useInstance, useReCreateInstanceWithSetterlessProps } from '../../hooks'
+import { defer, getOptions } from '../../utils'
 import { useMapContext } from '../Map2GIS'
 import { NonHtmlMarkerOptions, SETTERLESS_PROPS_KEYS } from './constants'
 import { useUpdatingHtmlMarkerInstanceOptions } from './hooks/useUpdatingHtmlMarkerInstanceOptions'
@@ -27,13 +27,18 @@ const HtmlMarker2GISComponent: FC<HtmlMarker2GISProps> = (props) => {
   const { mapGLBundle, mapInstance } = useMapContext()
   const [getInstance, setInstance] = useInstance<HtmlMarker>()
 
+  const forceUpdate = useForceUpdate()
+  const forceUpdateDeferred = useMemo(() => defer(forceUpdate, 300), [forceUpdate])
+
   // формируем реф с опциями html маркера
   useEffect(() => {
     htmlMarkerOptionsRef.current = getOptions<HtmlMarkerOptionsWithoutHtml, HtmlMarker2GISProps, NonHtmlMarkerOptions>(
       props,
       checkOptionsKey,
     )
-  }, [props])
+
+    forceUpdateDeferred()
+  }, [forceUpdateDeferred, props])
 
   // Обновляем опции через сеттеры инстанса
   useUpdatingHtmlMarkerInstanceOptions(getInstance, htmlMarkerOptionsRef.current)
